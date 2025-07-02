@@ -1,0 +1,2 @@
+# DocSwift
+这是一个简单的Next.JS项目，可以让你在几分钟内获得一个类似于Gitbook的Document，无需过多配置，仅仅在docs目录下放置自己的Md文件，剩下的交给Next.JS
