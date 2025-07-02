@@ -1,0 +1,389 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 导入 KaTeX CSS */
+@import url("https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css");
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 84% 4.9%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 94.1%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-noto-sans-sc), var(--font-inter), system-ui, sans-serif;
+  }
+}
+
+/* 中文字体优化 */
+.font-sans {
+  font-family: var(--font-noto-sans-sc), var(--font-inter), system-ui, sans-serif;
+}
+
+/* KaTeX 数学公式样式 */
+.katex {
+  font-size: 1.1em !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+.katex-display {
+  margin: 2rem 0 !important;
+  text-align: center !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+}
+
+.katex-display > .katex {
+  display: inline-block !important;
+  white-space: nowrap !important;
+  text-align: left !important;
+}
+
+/* 确保数学公式在暗黑模式下可见 */
+.dark .katex {
+  color: hsl(var(--foreground)) !important;
+}
+
+.dark .katex .base {
+  color: hsl(var(--foreground)) !important;
+}
+
+/* 行内数学公式 */
+.katex-html {
+  color: hsl(var(--foreground)) !important;
+}
+
+/* 代码高亮样式 */
+.hljs {
+  background: hsl(var(--muted)) !important;
+  color: hsl(var(--foreground)) !important;
+  padding: 1.5rem !important;
+  border-radius: 0.75rem !important;
+  font-size: 0.875rem !important;
+  line-height: 1.6 !important;
+  overflow-x: auto !important;
+  border: 1px solid hsl(var(--border)) !important;
+  font-family: "JetBrains Mono", "Fira Code", "Consolas", monospace !important;
+}
+
+.dark .hljs {
+  background: hsl(var(--muted)) !important;
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+/* 代码高亮语法颜色 */
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-built_in {
+  color: hsl(var(--primary)) !important;
+  font-weight: 600 !important;
+}
+
+.hljs-string,
+.hljs-attr {
+  color: #22c55e !important;
+}
+
+.hljs-number,
+.hljs-literal {
+  color: #f59e0b !important;
+}
+
+.hljs-comment {
+  color: hsl(var(--muted-foreground)) !important;
+  font-style: italic !important;
+  opacity: 0.8 !important;
+}
+
+.hljs-function,
+.hljs-title {
+  color: #3b82f6 !important;
+  font-weight: 600 !important;
+}
+
+.hljs-variable {
+  color: #ef4444 !important;
+}
+
+.hljs-operator {
+  color: hsl(var(--foreground)) !important;
+}
+
+/* 行内代码样式 */
+:not(pre) > code {
+  background: hsl(var(--muted)) !important;
+  color: hsl(var(--foreground)) !important;
+  padding: 0.2rem 0.4rem !important;
+  border-radius: 0.375rem !important;
+  font-size: 0.875em !important;
+  font-weight: 500 !important;
+  border: 1px solid hsl(var(--border)) !important;
+  font-family: "JetBrains Mono", "Fira Code", "Consolas", monospace !important;
+}
+
+/* 搜索高亮 */
+mark {
+  background-color: hsl(var(--primary) / 0.2) !important;
+  color: hsl(var(--primary-foreground)) !important;
+  padding: 0.125rem 0.25rem !important;
+  border-radius: 0.25rem !important;
+}
+
+.dark mark {
+  background-color: hsl(var(--primary) / 0.3) !important;
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* Prose 样式增强 */
+.prose {
+  color: hsl(var(--foreground)) !important;
+  max-width: none !important;
+  line-height: 1.75 !important;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  color: hsl(var(--foreground)) !important;
+  font-weight: 700 !important;
+  margin-top: 2.5rem !important;
+  margin-bottom: 1.25rem !important;
+  line-height: 1.3 !important;
+  letter-spacing: -0.025em !important;
+}
+
+.prose h1 {
+  font-size: 2.25rem !important;
+}
+
+.prose h2 {
+  font-size: 1.875rem !important;
+}
+
+.prose h3 {
+  font-size: 1.5rem !important;
+}
+
+.prose h4 {
+  font-size: 1.25rem !important;
+}
+
+.prose p {
+  color: hsl(var(--muted-foreground)) !important;
+  line-height: 1.8 !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.prose a {
+  color: hsl(var(--primary)) !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+  border-bottom: 1px solid transparent !important;
+  transition: all 0.2s ease !important;
+}
+
+.prose a:hover {
+  border-bottom-color: hsl(var(--primary)) !important;
+}
+
+.prose strong {
+  color: hsl(var(--foreground)) !important;
+  font-weight: 700 !important;
+}
+
+.prose ul,
+.prose ol {
+  margin: 1.5rem 0 !important;
+  padding-left: 1.75rem !important;
+}
+
+.prose li {
+  margin: 0.75rem 0 !important;
+  color: hsl(var(--muted-foreground)) !important;
+  line-height: 1.7 !important;
+}
+
+.prose blockquote {
+  border-left: 4px solid hsl(var(--primary)) !important;
+  background: hsl(var(--muted) / 0.3) !important;
+  padding: 1.5rem 2rem !important;
+  margin: 2rem 0 !important;
+  border-radius: 0 0.75rem 0.75rem 0 !important;
+  position: relative !important;
+}
+
+.prose blockquote::before {
+  content: '"' !important;
+  font-size: 4rem !important;
+  color: hsl(var(--primary) / 0.3) !important;
+  position: absolute !important;
+  top: -0.5rem !important;
+  left: 1rem !important;
+  font-family: serif !important;
+}
+
+.prose blockquote p {
+  margin: 0 !important;
+  font-style: italic !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.prose table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  margin: 2rem 0 !important;
+  border: 1px solid hsl(var(--border)) !important;
+  border-radius: 0.5rem !important;
+  overflow: hidden !important;
+}
+
+.prose th,
+.prose td {
+  border: 1px solid hsl(var(--border)) !important;
+  padding: 1rem !important;
+  text-align: left !important;
+}
+
+.prose th {
+  background: hsl(var(--muted) / 0.5) !important;
+  font-weight: 700 !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+.prose td {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+.prose hr {
+  border: none !important;
+  border-top: 2px solid hsl(var(--border)) !important;
+  margin: 3rem 0 !important;
+  border-radius: 1px !important;
+}
+
+/* 代码块容器样式 */
+.prose pre {
+  background: hsl(var(--muted)) !important;
+  border: 1px solid hsl(var(--border)) !important;
+  border-radius: 0.75rem !important;
+  padding: 0 !important;
+  margin: 2rem 0 !important;
+  overflow: hidden !important;
+}
+
+.prose pre code {
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  font-size: inherit !important;
+}
+
+/* 响应式优化 */
+@media (max-width: 768px) {
+  .prose {
+    font-size: 0.9rem !important;
+  }
+
+  .prose h1 {
+    font-size: 1.875rem !important;
+  }
+
+  .prose h2 {
+    font-size: 1.5rem !important;
+  }
+
+  .prose h3 {
+    font-size: 1.25rem !important;
+  }
+
+  .katex-display {
+    font-size: 0.9em !important;
+  }
+}
+
+/* 动画优化 */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 确保 KaTeX 字体加载 */
+@font-face {
+  font-family: "KaTeX_Main";
+  src: url("https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/fonts/KaTeX_Main-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
