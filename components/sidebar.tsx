@@ -7,7 +7,7 @@ import { ChevronDown, ChevronRight, FileText, Tag, Menu, X } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
-import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetHeader, SheetTitle } from "@/components/ui/sheet"
 import { gsap } from "gsap"
 import type { DocItem } from "@/lib/docs"
 
@@ -223,14 +223,16 @@ export function Sidebar({ docs }: SidebarProps) {
           </Button>
         </SheetTrigger>
         <SheetContent side="left" className="w-80 p-0">
-          <div className="flex items-center justify-between p-4 border-b">
-            <h2 className="font-semibold">文档导航</h2>
+          {/* 修复：使用统一的头部，只有一个关闭按钮 */}
+          <SheetHeader className="flex flex-row items-center justify-between p-4 border-b">
+            <SheetTitle>文档导航</SheetTitle>
             <SheetClose asChild>
-              <Button variant="ghost" size="sm">
+              <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
                 <X className="h-4 w-4" />
+                <span className="sr-only">关闭</span>
               </Button>
             </SheetClose>
-          </div>
+          </SheetHeader>
           <SidebarContent docs={docs} />
         </SheetContent>
       </Sheet>

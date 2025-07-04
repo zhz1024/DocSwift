@@ -6,6 +6,7 @@ import { Book, AlertCircle } from "lucide-react"
 import Link from "next/link"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { TocToggle } from "@/components/toc-toggle"
 import { SidebarToggle } from "@/components/sidebar-toggle"
 
 // Loading component
@@ -60,6 +61,8 @@ export default async function DocsLayout({
 
           <div className="flex flex-1 items-center justify-end space-x-2">
             <ThemeToggle />
+            {/* 目录切换按钮 - 放在主题切换按钮右边 */}
+            <TocToggle />
           </div>
         </div>
       </header>

@@ -41,10 +41,13 @@ export function DocContent({ doc, previousDoc, nextDoc }: DocContentProps) {
   const readingTime = Math.ceil(doc.content.length / 1000) // 大约每分钟1000字符
 
   return (
-    <div className="flex gap-8 max-w-none">
-      {/* 主内容区域 */}
-      <div className="flex-1 min-w-0">
-        <article className="max-w-4xl" ref={contentRef}>
+    <>
+      {/* 固定的目录导航 */}
+      <TableOfContents content={doc.content} />
+
+      {/* 主内容区域 - 调整右边距为目录留出空间 */}
+      <div className="w-full pr-0 xl:pr-80">
+        <article className="max-w-4xl mx-auto" ref={contentRef}>
           {/* 头部信息 */}
           <header className="mb-8 pb-6 border-b">
             <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text leading-tight">
@@ -130,11 +133,6 @@ export function DocContent({ doc, previousDoc, nextDoc }: DocContentProps) {
           </div>
         </article>
       </div>
-
-      {/* 右侧目录导航 */}
-      <aside className="hidden xl:block w-64 flex-shrink-0">
-        <TableOfContents content={doc.content} />
-      </aside>
-    </div>
+    </>
   )
 }
