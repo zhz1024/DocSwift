@@ -16,7 +16,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20'
-          cache: 'pnpm'  # 使用 pnpm 缓存
+          cache: 'npm'  # 使用 pnpm 缓存
 
       - name: Setup PNPM
         uses: pnpm/action-setup@v2
