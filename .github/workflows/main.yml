@@ -1,0 +1,45 @@
+name: Deploy to Netlify
+
+on:
+  push:
+    branches: [ main ]  # 只在 main 分支推送时触发
+  pull_request:         # 可选：在 PR 时也触发（通常用于预览）
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # 1. 检出代码
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      # 2. 设置 Node.js（如果是 JavaScript 项目）
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'  # 使用你项目所需的 Node 版本
+          cache: 'npm'
+      
+      # 3. 安装依赖（可选，如果你的项目需要）
+      - name: Install dependencies
+        run: npm install
+      
+      # # 4. 构建项目（可选，如果你的项目需要构建步骤）
+      # - name: Build project
+      #   run: npm run build
+        
+      # 5. 部署到 Netlify
+      - name: Deploy to Netlify
+        uses: jsmrcaga/action-netlify-deploy@v2.2.0
+        with:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          build_directory: 'dist'  # 修改为你的构建输出目录
+          build_command: 'npm run build'  # 你的构建命令
+          NETLIFY_DEPLOY_MESSAGE: "Deploy from GitHub Actions: ${{ github.sha }}"
+          NETLIFY_DEPLOY_TO_PROD: true  # 设为 false 则部署为草稿
+          # functions_directory: 'functions'  # 如果你使用 Netlify 函数
+          # debug: true  # 需要调试时启用
+          
