@@ -29,7 +29,9 @@ jobs:
       # # 4. 构建项目（可选，如果你的项目需要构建步骤）
       # - name: Build project
       #   run: npm run build
-        
+        - name: Install Netlify CLI globally
+          run: npm install -g netlify-cli
+
       # 5. 部署到 Netlify
       - name: Deploy to Netlify
         uses: jsmrcaga/action-netlify-deploy@v2.2.0
