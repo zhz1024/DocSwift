@@ -2,34 +2,38 @@ name: Deploy to Netlify
 
 on:
   push:
-    branches: [ main ]  # 只在 main 分支推送时触发
-  pull_request:         # 可选：在 PR 时也触发（通常用于预览）
-    branches: [ main ]
+    branches: [main]
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
-    
-    steps:
-      # 1. 检出代码
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        
-      # # 2. 设置 Node.js（如果是 JavaScript 项目）
-      # - name: Setup Node.js
-      #   uses: actions/setup-node@v3
-      #   with:
-      #     node-version: '20'  # 使用你项目所需的 Node 版本
-      #     cache: 'npm'
-      
-      # 3. 安装依赖（可选，如果你的项目需要）
-      - name: Install dependencies
-        run: npm install -g netlify-cli
-      
-      # # 4. 构建项目（可选，如果你的项目需要构建步骤）
-      # - name: Build project
-      #   run: npm run build
 
+    steps:
+      - uses: actions/checkout@v4
+
+      # 1. 安装 Node.js 和 PNPM
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          cache: 'pnpm'  # 使用 pnpm 缓存
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      # 2. 安装依赖（使用 pnpm）
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # 3. 构建 Next.js
+      - name: Build Next.js
+        run: pnpm build
+
+      # 4. 安装 Netlify CLI（全局）
+      - name: Install Netlify CLI
+        run: pnpm add -g netlify-cli
 
       # 5. 部署到 Netlify
       - name: Deploy to Netlify
@@ -37,10 +41,6 @@ jobs:
         with:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-          build_directory: 'dist'  # 修改为你的构建输出目录
-          build_command: 'npm run build'  # 你的构建命令
-          NETLIFY_DEPLOY_MESSAGE: "Deploy from GitHub Actions: ${{ github.sha }}"
-          NETLIFY_DEPLOY_TO_PROD: true  # 设为 false 则部署为草稿
-          # functions_directory: 'functions'  # 如果你使用 Netlify 函数
-          # debug: true  # 需要调试时启用
-          
+          build_directory: '.next'  # Next.js 默认输出目录
+          build_command: 'pnpm build'  # 使用 pnpm
+          netlify_path: '/usr/local/bin/netlify'  # 显式指定路径
