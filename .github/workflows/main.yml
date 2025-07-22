@@ -37,7 +37,7 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           build_directory: 'dist'  # 修改为你的构建输出目录
-          build_command: 'npm run build'  # 你的构建命令
+          build_command: 'pnpm run build'  # 你的构建命令
           NETLIFY_DEPLOY_MESSAGE: "Deploy from GitHub Actions: ${{ github.sha }}"
           NETLIFY_DEPLOY_TO_PROD: true  # 设为 false 则部署为草稿
           # functions_directory: 'functions'  # 如果你使用 Netlify 函数
