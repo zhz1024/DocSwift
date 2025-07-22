@@ -11,29 +11,29 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # 1. 安装 Node.js 和 PNPM
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-          cache: 'npm'  # 使用 pnpm 缓存
+      # # 1. 安装 Node.js 和 PNPM
+      # - name: Setup Node.js
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: '20'
+      #     cache: 'npm'  # 使用 pnpm 缓存
 
-      - name: Setup PNPM
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8
+      # - name: Setup PNPM
+      #   uses: pnpm/action-setup@v2
+      #   with:
+      #     version: 8
 
-      # 2. 安装依赖（使用 pnpm）
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+      # # 2. 安装依赖（使用 pnpm）
+      # - name: Install dependencies
+      #   run: pnpm install --frozen-lockfile
 
-      # 3. 构建 Next.js
-      - name: Build Next.js
-        run: pnpm build
+      # # 3. 构建 Next.js
+      # - name: Build Next.js
+      #   run: pnpm build
 
       # 4. 安装 Netlify CLI（全局）
       - name: Install Netlify CLI
-        run: pnpm add -g netlify-cli
+        run: npm add -g netlify-cli pnpm
 
       # 5. 部署到 Netlify
       - name: Deploy to Netlify
