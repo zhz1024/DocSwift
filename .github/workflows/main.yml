@@ -15,16 +15,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         
-      # 2. 设置 Node.js（如果是 JavaScript 项目）
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'  # 使用你项目所需的 Node 版本
-          cache: 'npm'
+      # # 2. 设置 Node.js（如果是 JavaScript 项目）
+      # - name: Setup Node.js
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: '20'  # 使用你项目所需的 Node 版本
+      #     cache: 'npm'
       
-      # 3. 安装依赖（可选，如果你的项目需要）
-      - name: Install dependencies
-        run: npm install
+      # # 3. 安装依赖（可选，如果你的项目需要）
+      # - name: Install dependencies
+      #   run: npm install
       
       # # 4. 构建项目（可选，如果你的项目需要构建步骤）
       # - name: Build project
